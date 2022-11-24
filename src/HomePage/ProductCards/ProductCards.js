@@ -1,21 +1,27 @@
 import React from "react";
 
-const ProductCards = () => {
+const ProductCards = ({ bike }) => {
+  console.log(bike);
+  const { name, location, resalePrice, originalPrice, used, posted, pic } =
+    bike;
   return (
     <div className="flex justify-center">
       <div className="rounded-lg shadow-lg bg-white max-w-sm">
         <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
-          <img
-            className="rounded-t-lg"
-            src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
-            alt=""
-          />
+          <img className="rounded-t-lg" src={pic} alt="" />
         </a>
         <div className="p-6">
-          <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
+          <h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
+          <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Resale Price : {resalePrice}
+          </p>
+          <p className="text-gray-700 text-base mb-4">
+            Original Price : {originalPrice}
+          </p>
+          <p className="text-gray-700 text-base mb-4">Used : {used} years</p>
+          <p className="text-gray-700 text-base mb-4">
+            Date of Post : {posted} years
           </p>
           <button
             type="button"
