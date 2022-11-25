@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const [account, setAccount] = useState("");
-  const navigate = useNavigate();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser } = useContext(AuthContext);
+  const [value, setValue] = useState("user");
   const {
     register,
     formState: { errors },
@@ -19,7 +17,6 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-
         const users = {
           name: data.name,
           email: data.email,
@@ -33,13 +30,11 @@ const SignUp = () => {
           body: JSON.stringify(users),
         })
           .then((res) => res.json())
-          .then((data) => {
-            reset();
-            toast.success("User Created Successfully.");
-            console.log(data);
-          });
+          .then((data) => {});
       })
       .catch((error) => console.log(error));
+    toast.success("User Created Successfully.");
+    reset();
   };
   return (
     <div>
@@ -109,7 +104,7 @@ const SignUp = () => {
                       type="radio"
                       name="inlineRadioOptions"
                       id="user"
-                      value="user"
+                      value={value}
                       {...register("role")}
                       checked
                     />
@@ -126,6 +121,7 @@ const SignUp = () => {
                       type="radio"
                       name="inlineRadioOptions"
                       id="seller"
+                      // value="seller"
                       value="seller"
                       {...register("role")}
                     />
