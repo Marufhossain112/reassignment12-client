@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignUp = () => {
+  const [account, setAccount] = useState("");
   const navigate = useNavigate();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -18,8 +20,14 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         reset();
-        console.log(user);
-        navigate("/");
+        toast("User Created Successfully.");
+        const userInfo = {
+          displayName: data.name,
+        };
+
+        updateUser(userInfo)
+          .then(() => {})
+          .catch((err) => console.log(err));
       })
       .catch((error) => console.log(error));
   };
@@ -83,32 +91,46 @@ const SignUp = () => {
                   )}
                 </div>
 
-                <div className="flex justify-between items-center mb-6">
-                  <div className="form-group form-check">
+                <h2>Account Type</h2>
+                <div className="flex justify-start mt-2">
+                  <div className="form-check form-check-inline mr-3">
                     <input
-                      type="checkbox"
-                      className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                      id="exampleCheck3"
+                      className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="user"
+                      value="user"
+                      {...register("role")}
                       checked
                     />
                     <label
                       className="form-check-label inline-block text-gray-800"
-                      for="exampleCheck2"
+                      for="user"
                     >
-                      Remember me
+                      User
                     </label>
                   </div>
-                  <a
-                    href="#!"
-                    className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                  >
-                    Forgot password?
-                  </a>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="seller"
+                      value="seller"
+                      {...register("role")}
+                    />
+                    <label
+                      className="form-check-label inline-block text-gray-800"
+                      for="seller"
+                    >
+                      Seller
+                    </label>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                  className="inline-block px-7 py-3 mt-5 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
