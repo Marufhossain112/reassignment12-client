@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -9,7 +11,14 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log(data);
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div>
