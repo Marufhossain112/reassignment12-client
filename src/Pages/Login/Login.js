@@ -8,6 +8,7 @@ const Login = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const handleLogin = (data) => {
@@ -15,6 +16,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        reset();
       })
       .catch((error) => {
         console.log(error.message);
