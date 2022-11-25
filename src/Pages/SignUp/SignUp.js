@@ -19,15 +19,25 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        reset();
-        toast("User Created Successfully.");
-        const userInfo = {
-          displayName: data.name,
-        };
 
-        updateUser(userInfo)
-          .then(() => {})
-          .catch((err) => console.log(err));
+        const users = {
+          name: data.name,
+          email: data.email,
+          role: data.role,
+        };
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(users),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            reset();
+            toast.success("User Created Successfully.");
+            console.log(data);
+          });
       })
       .catch((error) => console.log(error));
   };
