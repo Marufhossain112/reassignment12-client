@@ -1,12 +1,15 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import {
+  AuthContext,
+  MyContext,
+} from "../../context/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 
 const Login = ({ googleSignIn }) => {
   const googleProvider = new GoogleAuthProvider();
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useContext(MyContext);
   const {
     register,
     formState: { errors },
