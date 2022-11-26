@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ProductModal from "../ProductModal/ProductModal";
 
 const ProductCategories = () => {
   const [bikesData, setBikesData] = useState([]);
@@ -30,7 +31,9 @@ const ProductCategories = () => {
                 key={i}
                 className="px-4 py-2 text-center bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out"
               >
-                <Link to={`/allbikes/${brand._id}`}>{brand.bikesData[0].brandName}</Link>
+                <Link to={`/allbikes/${brand._id}`}>
+                  {brand.bikesData[0].brandName}
+                </Link>
               </li>
             ))}
           </ul>
@@ -42,6 +45,7 @@ const ProductCategories = () => {
           </a>
         </div>
       </div>
+      {/* <ProductModal></ProductModal> */}
     </div>
   );
 };
