@@ -3,7 +3,6 @@ import Home from "../HomePage/Home/Home";
 import ProductCategoriesId from "../HomePage/ProductCategoriesId/ProductCategoriesId";
 import Main from "../Main/Main";
 import AddProduct from "../Pages/AddProduct/AddProduct";
-import Dashboard from "../Pages/Dashboard/Dashboard";
 import DashboardLayout from "../Pages/DashboardLayout/DashboardLayout";
 import Login from "../Pages/Login/Login";
 import MyProducts from "../Pages/MyProducts/MyProducts";
@@ -37,5 +36,15 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "/dashboard/addproduct",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/dashboard/myproduct",
+        element: <MyProducts></MyProducts>,
+      },
+    ],
   },
 ]);

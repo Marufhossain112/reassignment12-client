@@ -14,7 +14,7 @@ const AddProduct = () => {
     reset();
   };
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
+    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md ">
       <h2 className="text-center font-semibold text-3xl mb-4">Add a Product</h2>
       <form onSubmit={handleSubmit(handleData)}>
         {/* name */}
