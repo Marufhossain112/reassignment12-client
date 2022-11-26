@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -39,11 +41,13 @@ const AddProduct = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(productDetails),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    }).then((res) => res.json());
     reset();
+    navigate("/dashboard/myproduct");
   };
+
+  // console.log(addproductsData);
+
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md ">
       <h2 className="text-center font-semibold text-3xl mb-4">Add a Product</h2>
