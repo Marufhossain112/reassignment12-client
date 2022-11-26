@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { MyContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, providerLogin } = useContext(MyContext);
+  const { createUser, providerLogin, updateUser } = useContext(MyContext);
   const [value, setValue] = useState("user");
   const googleProvider = new GoogleAuthProvider();
   // function for handling google button
@@ -46,24 +46,45 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        const users = {
-          name: data.name,
-          email: data.email,
-          role: data.role,
+        toast.success("User Created Successfully.");
+        // reset();
+        const userInfo = {
+          displayName: data.name,
         };
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(users),
-        })
-          .then((res) => res.json())
-          .then((data) => {});
+        updateUser(userInfo)
+          .then(() => {
+            const users = {
+              name: data.name,
+              email: data.email,
+              role: data.role,
+            };
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(users),
+            })
+              .then((res) => res.json())
+              .then((data) => {});
+          })
+          .catch((err) => console.log(err));
+        // const users = {
+        //   name: data.name,
+        //   email: data.email,
+        //   role: data.role,
+        // };
+        // fetch("http://localhost:5000/users", {
+        //   method: "POST",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify(users),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {});
       })
       .catch((error) => console.log(error));
-    toast.success("User Created Successfully.");
-    reset();
   };
   return (
     <div>

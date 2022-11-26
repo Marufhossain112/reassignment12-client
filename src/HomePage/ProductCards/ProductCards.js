@@ -3,7 +3,7 @@ import ProductModal from "../ProductModal/ProductModal";
 
 const ProductCards = ({ bike }) => {
   console.log(bike);
-  const { name, location, resalePrice, originalPrice, used, posted, pic } =
+  const { name, location, resalePrice, originalPrice, used, posted, pic, id } =
     bike;
   return (
     <div className="flex justify-center">
@@ -38,7 +38,7 @@ const ProductCards = ({ bike }) => {
           </label>
         </div>
       </div>
-      <ProductModal></ProductModal>
+      <ProductModal key={id} bikeDetails={bike}></ProductModal>
     </div>
   );
 };
