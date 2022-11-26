@@ -7,9 +7,11 @@ const AddProduct = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
   const handleData = (data) => {
     console.log(data);
+    reset();
   };
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">

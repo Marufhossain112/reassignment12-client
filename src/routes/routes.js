@@ -3,7 +3,10 @@ import Home from "../HomePage/Home/Home";
 import ProductCategoriesId from "../HomePage/ProductCategoriesId/ProductCategoriesId";
 import Main from "../Main/Main";
 import AddProduct from "../Pages/AddProduct/AddProduct";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import DashboardLayout from "../Pages/DashboardLayout/DashboardLayout";
 import Login from "../Pages/Login/Login";
+import MyProducts from "../Pages/MyProducts/MyProducts";
 import SignUp from "../Pages/SignUp/SignUp";
 
 export const router = createBrowserRouter([
@@ -29,10 +32,10 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
-      {
-        path: "/addproduct",
-        element: <AddProduct></AddProduct>,
-      },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
   },
 ]);
