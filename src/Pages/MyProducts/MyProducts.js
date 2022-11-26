@@ -16,6 +16,25 @@ const MyProducts = () => {
   });
   console.log(addproductsData);
 
+  const advertiseProduct = (id) => {
+    // console.log("i am advertising", id);
+    fetch(`http://localhost:5000/advertiseproduct/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Product advertise successful.");
+        console.log(data);
+        fetch("http://localhost:5000/advertiseproduct", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
+  };
+
   const handleDelete = (id) => {
     // console.log("I am deleting ", id);
     fetch(`http://localhost:5000/dashboard/addproduct/${id}`, {
@@ -70,6 +89,13 @@ const MyProducts = () => {
                       scope="col"
                       class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
+                      Status
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       Delete
                     </th>
                   </tr>
@@ -90,11 +116,22 @@ const MyProducts = () => {
                         {product.condition}
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        available
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {/* <FaBeer></FaBeer> */}
                         <AiOutlineDelete
                           onClick={() => handleDelete(product._id)}
                           className="ml-3"
                         ></AiOutlineDelete>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <button
+                          onClick={() => advertiseProduct(product._id)}
+                          className="btn btn-sm"
+                        >
+                          Advertise
+                        </button>
                       </td>
                     </tr>
                   ))}
