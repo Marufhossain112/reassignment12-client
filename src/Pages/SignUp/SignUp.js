@@ -39,7 +39,6 @@ const SignUp = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm();
 
   const handleSignUp = (data) => {

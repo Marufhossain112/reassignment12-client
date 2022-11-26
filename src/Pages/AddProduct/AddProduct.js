@@ -1,10 +1,21 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const handleData = (data) => {
+    console.log(data);
+  };
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
       <h2 className="text-center font-semibold text-3xl mb-4">Add a Product</h2>
-      <form>
+      <form onSubmit={handleSubmit(handleData)}>
+        {/* name */}
         <div className="form-group mb-6">
           <input
             type="text"
@@ -24,9 +35,10 @@ const AddProduct = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput7"
             placeholder="Product Name"
-            disabled
+            {...register("name", { required: true })}
           />
         </div>
+        {/* price */}
         <div className="form-group mb-6">
           <input
             type="text"
@@ -48,53 +60,56 @@ const AddProduct = () => {
             id="exampleInput8"
             placeholder="Product Price"
             // defaultValue={user?.email}
-            disabled
+            {...register("price", { required: true })}
           />
         </div>
-
+        {/* condition */}
         <div className="form-group mb-6">
-          <div class="flex justify-center ">
+          <div className="flex justify-center ">
             <h2 className="font-bold ">Condition :</h2>
-            <div class="form-check form-check-inline  mx-3">
+            <div className="form-check form-check-inline  mx-3">
               <input
-                class="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio1"
-                value="option1"
+                value="Excellent"
+                {...register("condition")}
               />
               <label
-                class="form-check-label inline-block text-gray-800"
+                className="form-check-label inline-block text-gray-800"
                 for="inlineRadio10"
               >
                 Excellent
               </label>
             </div>
-            <div class="form-check form-check-inline mx-3">
+            <div className="form-check form-check-inline mx-3">
               <input
-                class="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio2"
-                value="option2"
+                value="Good"
+                {...register("condition")}
               />
               <label
-                class="form-check-label inline-block text-gray-800"
+                className="form-check-label inline-block text-gray-800"
                 for="inlineRadio20"
               >
                 Good
               </label>
             </div>
-            <div class="form-check form-check-inline mx-3">
+            <div className="form-check form-check-inline mx-3">
               <input
-                class="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio2"
-                value="option2"
+                value="Fair"
+                {...register("condition")}
               />
               <label
-                class="form-check-label inline-block text-gray-800"
+                className="form-check-label inline-block text-gray-800"
                 for="inlineRadio20"
               >
                 Fair
@@ -102,7 +117,7 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-
+        {/* phone */}
         <div className="form-group mb-6">
           <input
             type="number"
@@ -122,8 +137,10 @@ const AddProduct = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput8"
             placeholder="Enter your number"
+            {...register("phone")}
           />
         </div>
+        {/* location */}
         <div className="form-group mb-6">
           <input
             type="text"
@@ -143,8 +160,10 @@ const AddProduct = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput8"
             placeholder="Enter location"
+            {...register("location")}
           />
         </div>
+        {/* Category */}
         <div className="form-group mb-6">
           <input
             type="text"
@@ -164,8 +183,10 @@ const AddProduct = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput8"
             placeholder="Product Category"
+            {...register("category")}
           />
         </div>
+        {/* year of purchase */}
         <div className="form-group mb-6">
           <input
             type="number"
@@ -185,13 +206,14 @@ const AddProduct = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput8"
             placeholder="Year of purchase"
+            {...register("purchaseYear")}
           />
         </div>
-
+        {/* description */}
         <div className="form-group mb-6">
           {" "}
           <textarea
-            class="
+            className="
         form-control
         block
         w-full
@@ -211,17 +233,19 @@ const AddProduct = () => {
             id="exampleFormControlTextarea13"
             rows="3"
             placeholder="Product Description"
+            {...register("description")}
           ></textarea>
         </div>
-
+        {/* submit */}
         <div className="modal-action justify-center">
-          <label
+          <button
+            type="submit"
             htmlFor="booking-modal"
             className="btn"
-            // onClick={() => toast.success("The item is booked")}
+            onClick={() => toast.success("The product is added")}
           >
             Submit
-          </label>
+          </button>
         </div>
       </form>
     </div>
