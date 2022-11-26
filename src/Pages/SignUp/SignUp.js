@@ -14,6 +14,23 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        const users = {
+          name: user.displayName,
+          email: user.email,
+          role: "buyer",
+        };
+        if (user) {
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(users),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+        }
       })
       .catch((error) => console.log(error));
     console.log(" I  am clicked");
