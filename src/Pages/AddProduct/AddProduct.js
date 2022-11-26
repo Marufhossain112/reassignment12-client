@@ -78,7 +78,7 @@ const AddProduct = () => {
         {/* price */}
         <div className="form-group mb-6">
           <input
-            type="text"
+            type="number"
             className="form-control block
                   
         w-full
