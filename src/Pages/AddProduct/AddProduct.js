@@ -1,3 +1,5 @@
+import { async } from "@firebase/util";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -11,6 +13,35 @@ const AddProduct = () => {
   } = useForm();
   const handleData = (data) => {
     console.log(data);
+    const {
+      name,
+      price,
+      condition,
+      phone,
+      category,
+      location,
+      purchaseYear,
+      description,
+    } = data;
+    const productDetails = {
+      name,
+      price,
+      condition,
+      phone,
+      category,
+      location,
+      purchaseYear,
+      description,
+    };
+    fetch("http://localhost:5000/dashboard/addproduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(productDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
     reset();
   };
   return (
