@@ -1,10 +1,23 @@
 import React from "react";
 import ProductModal from "../ProductModal/ProductModal";
-
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 const ProductCards = ({ bike }) => {
   console.log(bike);
   const { name, location, resalePrice, originalPrice, used, posted, pic, id } =
     bike;
+  const handleReportedItems = (bike) => {
+    // console.log("I am clikcing", bike);
+    fetch("http://localhost:5000/dashboard/reporteditems", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bike),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div className="flex justify-center">
       <div className="rounded-lg shadow-lg bg-white max-w-sm">
@@ -17,7 +30,14 @@ const ProductCards = ({ bike }) => {
           />
         </a>
         <div className="p-6">
-          <h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
+          <div className=" flex items-center justify-between">
+            {" "}
+            <h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
+            <MdOutlineReportGmailerrorred
+              className="text-2xl"
+              onClick={() => handleReportedItems(bike)}
+            ></MdOutlineReportGmailerrorred>
+          </div>
           <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">
             Resale Price : {resalePrice}

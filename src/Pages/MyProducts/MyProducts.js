@@ -57,7 +57,7 @@ const MyProducts = () => {
           <div class="overflow-hidden">
             {addproductsData.length < 1 ? (
               <div className="flex justify-center mr-40 mt-10 text-3xl">
-                Please Add a Product
+                My Products
               </div>
             ) : (
               <table class="min-w-full">
