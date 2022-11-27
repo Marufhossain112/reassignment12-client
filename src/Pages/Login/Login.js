@@ -6,16 +6,43 @@ import {
   MyContext,
 } from "../../context/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Login = ({ googleSignIn }) => {
   const googleProvider = new GoogleAuthProvider();
-  const { signIn } = useContext(MyContext);
+  const { signIn, providerLogin, updateUser } = useContext(MyContext);
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
+  const handlerBtnGoogle = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        const users = {
+          name: user.displayName,
+          email: user.email,
+          role: "buyer",
+        };
+        if (user) {
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(users),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+        }
+      })
+      .catch((error) => console.log(error));
+    console.log(" I  am clicked");
+  };
 
   const handleLogin = (data) => {
     signIn(data.email, data.password)
@@ -109,19 +136,14 @@ const Login = ({ googleSignIn }) => {
                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                   <p className="text-center font-semibold mx-4 mb-0">OR</p>
                 </div>
-
-                <a
-                  className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-                  style={{ backgroundColor: "#3b5998" }}
-                  href="#!"
-                  role="button"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="light"
-                >
-                  <FaGoogle></FaGoogle>
-                  Continue with Google
-                </a>
-              </form>
+              </form>{" "}
+              <button
+                onClick={handlerBtnGoogle}
+                className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+                style={{ backgroundColor: "#3b5998" }}
+              >
+                Sign in with google
+              </button>
             </div>
           </div>
         </div>
