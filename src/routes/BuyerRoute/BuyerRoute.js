@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
 import { MyContext } from "../../context/AuthProvider/AuthProvider";
 import useBuyer from "../../hooks/useBuyer/useBuyer";
 
@@ -10,7 +9,7 @@ const BuyerRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || isBuyerLoading) {
-    return <Loader></Loader>;
+    return <h1 className="text-5xl">Loading...</h1>;
   }
 
   if (user && isBuyer) {

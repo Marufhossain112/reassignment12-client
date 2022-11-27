@@ -24,7 +24,7 @@ const Login = ({ googleSignIn }) => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
 
         const users = {
           name: user.displayName,
@@ -42,6 +42,7 @@ const Login = ({ googleSignIn }) => {
             .then((res) => res.json())
             .then((data) => {
               navigate(from, { replace: true });
+              reset();
             })
             .catch((err) => console.log(err));
         }
