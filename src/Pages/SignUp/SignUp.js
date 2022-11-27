@@ -2,9 +2,13 @@ import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MyContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignUp = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const { createUser, providerLogin, updateUser } = useContext(MyContext);
   const [value, setValue] = useState("user");
   const googleProvider = new GoogleAuthProvider();
@@ -65,7 +69,9 @@ const SignUp = () => {
               body: JSON.stringify(users),
             })
               .then((res) => res.json())
-              .then((data) => {});
+              .then((data) => {
+                navigate(from, { replace: true });
+              });
           })
           .catch((err) => console.log(err));
         // const users = {

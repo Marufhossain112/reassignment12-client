@@ -6,9 +6,12 @@ import {
   MyContext,
 } from "../../context/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = ({ googleSignIn }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const googleProvider = new GoogleAuthProvider();
   const { signIn, providerLogin, updateUser } = useContext(MyContext);
   const {
@@ -22,6 +25,7 @@ const Login = ({ googleSignIn }) => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+
         const users = {
           name: user.displayName,
           email: user.email,
@@ -36,7 +40,9 @@ const Login = ({ googleSignIn }) => {
             body: JSON.stringify(users),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data))
+            .then((data) => {
+              navigate(from, { replace: true });
+            })
             .catch((err) => console.log(err));
         }
       })
@@ -48,6 +54,7 @@ const Login = ({ googleSignIn }) => {
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        navigate(from, { replace: true });
         console.log(user);
         reset();
       })
