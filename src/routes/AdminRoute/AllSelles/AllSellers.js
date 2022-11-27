@@ -29,7 +29,7 @@ const AllSellers = () => {
   refetch();
   return (
     <div>
-      <h2 className="text-3xl text-center mt-5">All Sellers</h2>
+      <h2 className="text-3xl text-center my-5">All Sellers</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
