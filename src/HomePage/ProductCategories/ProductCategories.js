@@ -16,7 +16,6 @@ const ProductCategories = () => {
   // console.log(bikesData.brandName);
   return (
     <div>
-      {/* <div>{bikesData.map((brand) => console.log(brand.brandName))}</div> */}
       <div className="mt-32">
         <div className="px-4 sm:px-8 max-w-5xl m-auto">
           <h1 className="text-center font-semibold text-3xl">
