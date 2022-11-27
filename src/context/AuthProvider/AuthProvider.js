@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -11,18 +12,26 @@ import app from "../../firebase/firebase.init";
 const auth = getAuth(app);
 export const MyContext = createContext();
 const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+
   const [user, setUser] = useState(null);
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   const providerLogin = (provider) => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
   const updateUser = (userInfo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, userInfo);
   };
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -30,11 +39,20 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("current User inside state change", currentUser);
       setUser(currentUser);
+      setLoading(true);
     });
 
     return () => unSubscribe();
   }, []);
-  const authInfo = { user, logOut, providerLogin, createUser, updateUser };
+  const authInfo = {
+    user,
+    loading,
+    signIn,
+    logOut,
+    providerLogin,
+    createUser,
+    updateUser,
+  };
   return <MyContext.Provider value={authInfo}>{children}</MyContext.Provider>;
 };
 
