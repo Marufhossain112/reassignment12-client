@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import ProductModal from "../ProductModal/ProductModal";
-
+// const axios = require("axios");
 const ProductCategories = () => {
   const [bikesData, setBikesData] = useState([]);
   //   setBikesData("");
-  useEffect(() => {
-    fetch("http://localhost:5000/allbikes")
-      .then((res) => res.json())
-      .then((data) => {
-        setBikesData(data);
-        console.log(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/allbikes")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setBikesData(data);
+  //       console.log(data);
+  //     });
+  // }, []);
   // console.log(bikesData.brandName);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/allbikes")
+      .then((res) => res.data)
+      .then((data) => setBikesData(data));
+  }, []);
   return (
     <div>
       <div className="mt-32">
