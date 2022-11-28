@@ -1,9 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const { data: allbikesData = [] } = useQuery({
+    queryKey: ["allbikes"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/allbikes");
+      const data = await res.json();
+      return data;
+    },
+  });
+  const imagebbHostKey = process.env.REACT_APP_imagebb_key;
   const navigate = useNavigate();
   const {
     register,
@@ -12,36 +22,57 @@ const AddProduct = () => {
     reset,
   } = useForm();
   const handleData = (data) => {
-    console.log(data);
-    const {
-      name,
-      price,
-      condition,
-      phone,
-      category,
-      location,
-      purchaseYear,
-      description,
-    } = data;
-    const productDetails = {
-      name,
-      price,
-      condition,
-      phone,
-      category,
-      location,
-      purchaseYear,
-      description,
-    };
-    fetch("http://localhost:5000/dashboard/addproduct", {
+    const image = data.img[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imagebbHostKey}`;
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(productDetails),
-    }).then((res) => res.json());
-    reset();
-    navigate("/dashboard/myproduct");
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const image = imgData.data.url;
+          const {
+            name,
+            price,
+            condition,
+            phone,
+            category,
+            location,
+            purchaseYear,
+            description,
+          } = data;
+          const productDetails = {
+            name,
+            price,
+            condition,
+            phone,
+            category,
+            location,
+            purchaseYear,
+            description,
+            image: image,
+          };
+          fetch("http://localhost:5000/dashboard/addproduct", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(productDetails),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              if (result) {
+                console.log(result);
+                toast.success(`${data.name} is added successfully`);
+                reset();
+                navigate("/dashboard/myproduct");
+              }
+            });
+        }
+      });
   };
 
   // console.log(addproductsData);
@@ -198,10 +229,10 @@ const AddProduct = () => {
             {...register("location")}
           />
         </div>
-        {/* Category */}
+        {/* image upload */}
         <div className="form-group mb-6">
           <input
-            type="text"
+            type="file"
             className="form-control block
         w-full
         px-3
@@ -217,9 +248,25 @@ const AddProduct = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInput8"
-            placeholder="Product Category"
-            {...register("category")}
+            placeholder="Choose an image"
+            {...register("img")}
           />
+        </div>
+        {/* category */}
+        <div className="form-group mb-6">
+          <select
+            {...register("category")}
+            className="select input-bordered w-full max-w-sm"
+          >
+            {allbikesData.map((category) => (
+              <option
+                key={category._id}
+                value={category.bikesData[0].brandName}
+              >
+                {category.bikesData[0].brandName}
+              </option>
+            ))}
+          </select>
         </div>
         {/* year of purchase */}
         <div className="form-group mb-6">
