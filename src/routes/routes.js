@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import Home from "../HomePage/Home/Home";
 import ProductCategoriesId from "../HomePage/ProductCategoriesId/ProductCategoriesId";
 import Main from "../Main/Main";
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -51,6 +53,7 @@ export const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard/addproduct",
