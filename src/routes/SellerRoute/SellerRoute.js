@@ -10,7 +10,7 @@ const SellerRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || isSellerLoading) {
-    return <h1 className="text-5xl">Loading...</h1>;
+    return <Loader></Loader>;
   }
 
   if (user && isSeller) {

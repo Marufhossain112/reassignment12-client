@@ -7,13 +7,14 @@ import {
 } from "../../context/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const Login = ({ googleSignIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const googleProvider = new GoogleAuthProvider();
-  const { signIn, providerLogin, updateUser } = useContext(MyContext);
+  const { signIn, providerLogin, updateUser, loading } = useContext(MyContext);
   const {
     register,
     formState: { errors },
@@ -63,6 +64,9 @@ const Login = ({ googleSignIn }) => {
         console.log(error.message);
       });
   };
+  if (loading) {
+    return <Loader></Loader>;
+  }
   return (
     <div>
       <section className="h-screen">

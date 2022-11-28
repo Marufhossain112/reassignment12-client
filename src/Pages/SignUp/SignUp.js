@@ -3,13 +3,15 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 import { MyContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { createUser, providerLogin, updateUser } = useContext(MyContext);
+  const { createUser, providerLogin, updateUser, loading } =
+    useContext(MyContext);
   const [value, setValue] = useState("user");
   const googleProvider = new GoogleAuthProvider();
   // function for handling google button
@@ -74,23 +76,12 @@ const SignUp = () => {
               });
           })
           .catch((err) => console.log(err));
-        // const users = {
-        //   name: data.name,
-        //   email: data.email,
-        //   role: data.role,
-        // };
-        // fetch("http://localhost:5000/users", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(users),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {});
       })
       .catch((error) => console.log(error));
   };
+  if (loading) {
+    return <Loader></Loader>;
+  }
   return (
     <div>
       <section className="h-screen">
