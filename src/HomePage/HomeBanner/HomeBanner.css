@@ -1,0 +1,15 @@
+@media (400px <= width <= 575px) {
+  .home-banner {
+    height: 28vh;
+  }
+}
+@media (575px <= width <= 900px) {
+  .home-banner {
+    height: 45vh;
+  }
+}
+@media (900px <= width <= 1500px) {
+  .home-banner {
+    height: 100vh;
+  }
+}
