@@ -42,14 +42,6 @@ const OrderCard = ({ order }) => {
           />
         </a>
         <div className="p-6">
-          <div className=" flex items-center justify-between">
-            {" "}
-            <h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
-            <MdOutlineReportGmailerrorred
-              className="text-2xl"
-              onClick={() => handleReportedItems(order)}
-            ></MdOutlineReportGmailerrorred>
-          </div>
           <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">Price : {price}</p>
           <p className="text-gray-700 text-base mb-4">Phone : {phone}</p>
