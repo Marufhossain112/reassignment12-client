@@ -1,6 +1,7 @@
 import React from "react";
 import ProductModal from "../ProductModal/ProductModal";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
+import toast from "react-hot-toast";
 const ProductCards = ({ bike }) => {
   console.log(bike);
   const { name, location, resalePrice, originalPrice, used, posted, pic, id } =
@@ -15,7 +16,10 @@ const ProductCards = ({ bike }) => {
       body: JSON.stringify(bike),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        toast.success("Report successful for this product.");
+        console.log(data);
+      });
   };
 
   return (
