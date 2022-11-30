@@ -43,6 +43,8 @@ const AddProduct = () => {
             location,
             purchaseYear,
             description,
+            originalPrice,
+            used,
           } = data;
           const productDetails = {
             name,
@@ -53,7 +55,9 @@ const AddProduct = () => {
             location,
             purchaseYear,
             description,
+            originalPrice,
             image: image,
+            used,
           };
           fetch("http://localhost:5000/dashboard/addproduct", {
             method: "POST",
@@ -127,6 +131,32 @@ const AddProduct = () => {
             placeholder="Product Price"
             // defaultValue={user?.email}
             {...register("price", { required: true })}
+          />
+        </div>
+
+        {/*original price */}
+        <div className="form-group mb-6">
+          <input
+            type="number"
+            className="form-control block
+                  
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            id="exampleInput8"
+            placeholder="Original Price"
+            // defaultValue={user?.email}
+            {...register("originalPrice", { required: true })}
           />
         </div>
         {/* condition */}
@@ -267,6 +297,31 @@ const AddProduct = () => {
               </option>
             ))}
           </select>
+        </div>
+        {/* used year */}
+        <div className="form-group mb-6">
+          <input
+            type="number"
+            className="form-control block
+                  
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            id="exampleInput8"
+            placeholder="Used Year"
+            // defaultValue={user?.email}
+            {...register("used", { required: true })}
+          />
         </div>
         {/* year of purchase */}
         <div className="form-group mb-6">

@@ -51,7 +51,7 @@ const ProductCards = ({ bike }) => {
           </p>
           <p className="text-gray-700 text-base mb-4">Used : {used} years</p>
           <p className="text-gray-700 text-base mb-4">
-            Date of Post : {posted} years
+            Date of Post : {posted} 
           </p>
           <label
             htmlFor="booking-modal"

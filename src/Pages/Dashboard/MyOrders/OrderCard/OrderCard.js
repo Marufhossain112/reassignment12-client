@@ -9,7 +9,7 @@ const OrderCard = ({ order }) => {
     price,
     condition,
     phone,
-    category,
+    brandName,
     description,
     id,
     image,
@@ -42,10 +42,11 @@ const OrderCard = ({ order }) => {
           />
         </a>
         <div className="p-6">
+          <p className="text-gray-700  font-bold text-2xl mb-4">{name}</p>
           <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">Price : {price}</p>
           <p className="text-gray-700 text-base mb-4">Phone : {phone}</p>
-          <p className="text-gray-700 text-base mb-4">Brand : {category}</p>
+          <p className="text-gray-700 text-base mb-4">Brand : {brandName}</p>
           <label
             htmlFor="booking-modal"
             type="button"
