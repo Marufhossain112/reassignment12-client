@@ -16,7 +16,7 @@ import AllSellers from "./AdminRoute/AllSelles/AllSellers";
 import ReportedItems from "./AdminRoute/ReportedItems/ReportedItems";
 // import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRouter/PrivateRoute";
-// import SellerRoute from "./SellerR/SellerRoute";
+import SellerRoute from "./SellerR/SellerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -65,18 +65,18 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/addproduct",
         element: (
-          // <SellerRoute>
-          //   {" "}
-          <AddProduct></AddProduct>
-          // </SellerRoute>
+          <SellerRoute>
+            {" "}
+            <AddProduct></AddProduct>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/myproduct",
         element: (
-          // <SellerRoute>
-          <MyProducts></MyProducts>
-          // </SellerRoute>
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
         ),
       },
       {
