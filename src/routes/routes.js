@@ -10,9 +10,11 @@ import DashboardLayout from "../Pages/DashboardLayout/DashboardLayout";
 import Login from "../Pages/Login/Login";
 import MyProducts from "../Pages/MyProducts/MyProducts";
 import SignUp from "../Pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import AllBuyers from "./AdminRoute/AllBuyers/AllBuyers";
 import AllSellers from "./AdminRoute/AllSelles/AllSellers";
 import ReportedItems from "./AdminRoute/ReportedItems/ReportedItems";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRouter/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
@@ -80,22 +82,34 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myorders",
         element: (
-          // <BuyerRoute>
-          <MyOrders></MyOrders>
-          // </BuyerRoute>
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
         ),
       },
       {
         path: "/dashboard/allsellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allbuyers",
-        element: <AllBuyers></AllBuyers>,
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/reporteditems",
-        element: <ReportedItems></ReportedItems>,
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>,
+          </AdminRoute>
+        ),
       },
     ],
   },
