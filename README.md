@@ -4,9 +4,8 @@ A place where you can buy and sell resalable products.
 
 Live Link - https://moto-rangers.web.app
 
-adminEmail:admin@gmail.com
-adminPassword:adminadmin
-
+- adminEmail:admin@gmail.com
+- adminPassword:adminadmin
 ## Features
 
 - User can login and register
