@@ -12,9 +12,11 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
   const { createUser, providerLogin, updateUser, loading, setLoading } =
     useContext(MyContext);
+
   const [value, setValue] = useState("user");
   const googleProvider = new GoogleAuthProvider();
   // function for handling google button
+
   const handlerBtnGoogle = () => {
     providerLogin(googleProvider)
       .then((result) => {
@@ -47,15 +49,17 @@ const SignUp = () => {
     handleSubmit,
     reset,
   } = useForm();
+  if (loading) {
+    return <Loader></Loader>;
+  }
 
   const handleSignUp = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         toast.success("User Created Successfully.");
-        reset();
-        navigate(from, { replace: true });
-        setLoading(false);
+        // reset();
+
         const userInfo = {
           displayName: data.name,
         };
@@ -74,15 +78,16 @@ const SignUp = () => {
               body: JSON.stringify(users),
             })
               .then((res) => res.json())
-              .then((data) => {});
+              .then((data) => {
+                setLoading(false);
+                navigate(from, { replace: true });
+              });
           })
           .catch((err) => console.log(err));
       })
       .catch((error) => console.log(error));
   };
-  if (loading) {
-    return <Loader></Loader>;
-  }
+
   return (
     <div>
       <section className="h-screen">
