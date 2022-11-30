@@ -33,7 +33,7 @@ const Login = ({ googleSignIn }) => {
           role: "buyer",
         };
         if (user) {
-          fetch("http://localhost:5000/users", {
+          fetch("https://server-resale.vercel.app/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",

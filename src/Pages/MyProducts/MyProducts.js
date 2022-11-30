@@ -9,7 +9,9 @@ const MyProducts = () => {
   const { data: addproductsData = [], refetch } = useQuery({
     queryKey: ["addproduct", data],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/dashboard/addproduct");
+      const res = await fetch(
+        "https://server-resale.vercel.app/dashboard/addproduct"
+      );
       const data = await res.json();
       return data;
     },
@@ -18,12 +20,12 @@ const MyProducts = () => {
 
   const advertiseProduct = (id) => {
     // console.log("i am advertising", id);
-    fetch(`http://localhost:5000/advertiseproduct/${id}`)
+    fetch(`https://server-resale.vercel.app/advertiseproduct/${id}`)
       .then((res) => res.json())
       .then((data) => {
         toast.success("Product advertise successful.");
         console.log(data);
-        fetch("http://localhost:5000/advertiseproduct", {
+        fetch("https://server-resale.vercel.app/advertiseproduct", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -37,7 +39,7 @@ const MyProducts = () => {
 
   const handleDelete = (id) => {
     // console.log("I am deleting ", id);
-    fetch(`http://localhost:5000/dashboard/addproduct/${id}`, {
+    fetch(`https://server-resale.vercel.app/dashboard/addproduct/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

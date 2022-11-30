@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allbikes/${params.id}`),
+          fetch(`https://server-resale.vercel.app/allbikes/${params.id}`),
       },
       {
         path: "/login",

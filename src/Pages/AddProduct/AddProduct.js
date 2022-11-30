@@ -8,7 +8,7 @@ const AddProduct = () => {
   const { data: allbikesData = [] } = useQuery({
     queryKey: ["allbikes"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allbikes");
+      const res = await fetch("https://server-resale.vercel.app/allbikes");
       const data = await res.json();
       return data;
     },
@@ -59,7 +59,7 @@ const AddProduct = () => {
             image: image,
             used,
           };
-          fetch("http://localhost:5000/dashboard/addproduct", {
+          fetch("https://server-resale.vercel.app/dashboard/addproduct", {
             method: "POST",
             headers: {
               "content-type": "application/json",
