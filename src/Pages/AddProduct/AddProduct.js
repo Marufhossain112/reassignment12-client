@@ -39,7 +39,7 @@ const AddProduct = () => {
             price,
             condition,
             phone,
-            category,
+            brandName,
             location,
             purchaseYear,
             description,
@@ -49,7 +49,7 @@ const AddProduct = () => {
             price,
             condition,
             phone,
-            category,
+            brandName,
             location,
             purchaseYear,
             description,
@@ -252,18 +252,18 @@ const AddProduct = () => {
             {...register("img")}
           />
         </div>
-        {/* category */}
+        {/* brandName */}
         <div className="form-group mb-6">
           <select
-            {...register("category")}
+            {...register("brandName")}
             className="select input-bordered w-full max-w-sm"
           >
-            {allbikesData.map((category) => (
+            {allbikesData.map((brandName) => (
               <option
-                key={category._id}
-                value={category.bikesData[0].brandName}
+                key={brandName._id}
+                value={brandName.bikesData[0].brandName}
               >
-                {category.bikesData[0].brandName}
+                {brandName.bikesData[0].brandName}
               </option>
             ))}
           </select>

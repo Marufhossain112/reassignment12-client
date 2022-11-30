@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 const ProductCards = ({ bike }) => {
   console.log(bike);
   const { name, location, resalePrice, originalPrice, used, posted, pic, id } =
-    bike;
+  bike;
   const handleReportedItems = (bike) => {
     // console.log("I am clikcing", bike);
     fetch("http://localhost:5000/dashboard/reporteditems", {
