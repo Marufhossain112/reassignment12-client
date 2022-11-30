@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import toast from "react-hot-toast";
+import { MyContext } from "../../../../context/AuthProvider/AuthProvider";
 const OrderCard = ({ order }) => {
   console.log(order);
+  const { user } = useContext(MyContext);
   const {
     name,
     location,
@@ -43,6 +45,7 @@ const OrderCard = ({ order }) => {
         </a>
         <div className="p-6">
           <p className="text-gray-700  font-bold text-2xl mb-4">{name}</p>
+          {/* <p className="text-gray-700 text-base mb-4">Seller : {user?.name}</p> */}
           <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">Price : {price}</p>
           <p className="text-gray-700 text-base mb-4">Phone : {phone}</p>

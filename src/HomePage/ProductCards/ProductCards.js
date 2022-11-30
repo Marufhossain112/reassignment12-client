@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import ProductModal from "../ProductModal/ProductModal";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import toast from "react-hot-toast";
+import { MyContext } from "../../context/AuthProvider/AuthProvider";
 const ProductCards = ({ bike }) => {
+  const { user } = useContext(MyContext);
   console.log(bike);
   const { name, location, resalePrice, originalPrice, used, posted, pic, id } =
-  bike;
+    bike;
   const handleReportedItems = (bike) => {
     // console.log("I am clikcing", bike);
     fetch("http://localhost:5000/dashboard/reporteditems", {
@@ -42,6 +44,9 @@ const ProductCards = ({ bike }) => {
               onClick={() => handleReportedItems(bike)}
             ></MdOutlineReportGmailerrorred>
           </div>
+          <p className="text-gray-700 text-base mb-4">
+            Seller : {user?.displayName}
+          </p>
           <p className="text-gray-700 text-base mb-4">Location : {location}</p>
           <p className="text-gray-700 text-base mb-4">
             Resale Price : {resalePrice}
@@ -51,7 +56,7 @@ const ProductCards = ({ bike }) => {
           </p>
           <p className="text-gray-700 text-base mb-4">Used : {used} years</p>
           <p className="text-gray-700 text-base mb-4">
-            Date of Post : {posted} 
+            Date of Post : {posted}
           </p>
           <label
             htmlFor="booking-modal"
