@@ -10,7 +10,7 @@ const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { createUser, providerLogin, updateUser, loading } =
+  const { createUser, providerLogin, updateUser, loading, setLoading } =
     useContext(MyContext);
   const [value, setValue] = useState("user");
   const googleProvider = new GoogleAuthProvider();
@@ -45,6 +45,7 @@ const SignUp = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const handleSignUp = (data) => {
@@ -52,7 +53,9 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         toast.success("User Created Successfully.");
-        // reset();
+        reset();
+        navigate(from, { replace: true });
+        setLoading(false);
         const userInfo = {
           displayName: data.name,
         };
@@ -71,9 +74,7 @@ const SignUp = () => {
               body: JSON.stringify(users),
             })
               .then((res) => res.json())
-              .then((data) => {
-                navigate(from, { replace: true });
-              });
+              .then((data) => {});
           })
           .catch((err) => console.log(err));
       })
