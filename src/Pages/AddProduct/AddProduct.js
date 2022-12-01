@@ -13,7 +13,7 @@ const AddProduct = () => {
       return data;
     },
   });
-  const imagebbHostKey = process.env.REACT_APP_imagebb_key;
+  const imagebbHostKey = "72a7c2881b6a435fb87637c5c5f663b1";
   const navigate = useNavigate();
   const {
     register,

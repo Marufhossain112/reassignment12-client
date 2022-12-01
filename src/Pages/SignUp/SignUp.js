@@ -52,7 +52,6 @@ const SignUp = () => {
   if (loading) {
     return <Loader></Loader>;
   }
-
   const handleSignUp = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
@@ -79,8 +78,8 @@ const SignUp = () => {
             })
               .then((res) => res.json())
               .then((data) => {
-                setLoading(false);
                 navigate(from, { replace: true });
+                setLoading(false);
               });
           })
           .catch((err) => console.log(err));
